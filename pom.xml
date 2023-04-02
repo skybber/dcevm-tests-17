@@ -4,11 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>java.com.github.dcevm</groupId>
-    <artifactId>dcevm-tests-15</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>dcevm-tests-17</artifactId>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
-    <description>Tests for DCEVM project</description>
-
+    <description>Tests for DCEVM 17 project</description>
 
     <properties>
         <asm.version>9.0</asm.version>
@@ -33,7 +32,6 @@
             <artifactId>asm-commons</artifactId>
             <version>${asm.version}</version>
         </dependency>
-
     </dependencies>
 
     <profiles>
@@ -71,12 +69,39 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
-                    <argLine>-XX:+AllowEnhancedClassRedefinition -XX:+UseSerialGC -Xlog:redefine+class*=trace --add-opens=java.base/java.lang=ALL-UNNAMED -javaagent:${basedir}/dcevm-tests-agent.jar</argLine>
-                    <!--<argLine>-XX:-UseCHA -XX:+UseG1GC -XX:+AllowEnhancedClassRedefinition -Xlog:redefine+class*=info -javaagent:${basedir}/dcevm-tests-agent.jar</argLine>-->
+                    <argLine>-XX:+AllowEnhancedClassRedefinition -XX:+UseSerialGC -Xlog:redefine+class*=trace --add-opens=java.base/java.lang=ALL-UNNAMED -javaagent:${basedir}/dcevm-tests-agent.jar -Djava.library.path=${project.basedir}</argLine>
                     <excludedGroups>com.github.dcevm.test.category.Full</excludedGroups>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>compile-c</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>gcc</executable>
+                            <workingDirectory>${project.basedir}/src/main/native</workingDirectory>
+                            <arguments>
+                                <argument>-O2</argument>
+                                <argument>-Wall</argument>
+                                <argument>-Werror</argument>
+                                <argument>-I${java.home}/include/</argument>
+                                <argument>-I${java.home}/include/linux/</argument>
+                                <argument>-shared</argument>
+                                <argument>-o</argument>
+                                <argument>${project.basedir}/libnatives.so</argument>
+                                <argument>${project.basedir}/src/main/native/natives.c</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
