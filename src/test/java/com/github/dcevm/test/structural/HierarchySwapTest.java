@@ -24,9 +24,11 @@
 
 package com.github.dcevm.test.structural;
 
+import com.github.dcevm.test.category.Full;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static com.github.dcevm.test.util.HotSwapTestHelper.__toVersion__;
 import static com.github.dcevm.test.util.HotSwapTestHelper.__version__;
@@ -37,7 +39,7 @@ import static org.junit.Assert.*;
  *
  * @author Thomas Wuerthinger
  */
-@Ignore
+@Category(Full.class)
 public class HierarchySwapTest {
 
   // Version 0

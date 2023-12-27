@@ -24,11 +24,9 @@
 package com.github.dcevm.test.structural;
 
 import com.github.dcevm.ClassRedefinitionPolicy;
-import com.github.dcevm.test.category.Full;
+import jdk.internal.vm.annotation.IntrinsicCandidate;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import static com.github.dcevm.test.util.HotSwapTestHelper.__toVersion__;
 import static com.github.dcevm.test.util.HotSwapTestHelper.__version__;
@@ -39,8 +37,6 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Thomas Wuerthinger
  */
-@Category(Full.class)
-@Ignore
 public class RedefineObjectClassTest {
 
   // Version 0
@@ -61,25 +57,23 @@ public class RedefineObjectClassTest {
   @ClassRedefinitionPolicy(alias = java.lang.Object.class)
   public static class A___1 {
 
+    @IntrinsicCandidate
+    public A___1() {}
+
+    @IntrinsicCandidate
     public final native Class<? extends Object> getClass___();
 
+    @IntrinsicCandidate
     public native int hashCode();
 
     public boolean equals(Object obj) {
       return (this == obj);
     }
 
-    public static int x;
-    public static int x1;
-    public static int x2;
-    public static int x3;
-    public static int x4;
-    public static int x5;
-
+    @IntrinsicCandidate
     protected native Object clone() throws CloneNotSupportedException;
 
     public String toString() {
-      System.out.println("x=" + (x++));
       return getClass().getName() + "@" + Integer.toHexString(hashCode());// myTestFunction___();
     }
 
@@ -87,8 +81,10 @@ public class RedefineObjectClassTest {
       return "test";
     }
 
+    @IntrinsicCandidate
     public final native void notify___();
 
+    @IntrinsicCandidate
     public final native void notifyAll___();
 
     public final native void wait___(long timeout) throws InterruptedException;

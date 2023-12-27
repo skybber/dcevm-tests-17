@@ -61,6 +61,10 @@
                 <configuration>
                     <source>16</source>
                     <target>16</target>
+                    <compilerArgs>
+                        <arg>--add-exports</arg>
+                        <arg>java.base/jdk.internal.vm.annotation=ALL-UNNAMED</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
 

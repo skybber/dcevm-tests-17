@@ -2,6 +2,7 @@ package com.github.dcevm.test.structural;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import static com.github.dcevm.test.util.HotSwapTestHelper.__toVersion__;
 import static com.github.dcevm.test.util.HotSwapTestHelper.__version__;
@@ -60,7 +61,7 @@ public class AnonymousClassInMethodTest {
   // TODO this test fails, because conent of A$1 is now interface I2 instead of interface I (not compatible change)
   // HotswapAgent plugin AnonymousClassPatch solves this on Java instrumentation level by exchanging content of class files.
   // @see https://github.com/HotswapProjects/HotswapAgent/tree/master/HotswapAgent/src/main/java/org/hotswap/agent/plugin/jvm
-  //@Test
+//  @Test
   public void testAnonymous() {
     assert __version__() == 0;
     Assert.assertTrue(new A().test());
