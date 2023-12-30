@@ -139,5 +139,7 @@ public class RedefineObjectClassTest {
     __toVersion__(0);
     __toVersion__(1);
     __toVersion__(0);
+    __toVersion__(1);
+    __toVersion__(0);
   }
 }
