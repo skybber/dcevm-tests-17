@@ -111,11 +111,6 @@ public class ModifyObjectClassInstanceTest {
 
         Object o = new Object();
         __toVersion__(1);
-
-        System.out.println(this.toString());
-        System.out.println(o.toString());
-        System.out.println(this.toString());
-
         //assertEquals("test", o.toString());
         assertEquals("test", Helper.access(o));
         __toVersion__(0);
